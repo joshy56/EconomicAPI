@@ -20,4 +20,13 @@ public interface EconomyManager extends Attachable {
     default @NotNull Response detachStorage() {
         return detach(EconomyStorage.class);
     }
+    default @NotNull Optional<EconomyRepository> repository() {
+        return attached(EconomyRepository.class);
+    }
+    default @NotNull Response attachRepository(@NotNull final EconomyRepository repository) {
+        return attach(EconomyRepository.class, repository);
+    }
+    default @NotNull Response detachRepository() {
+        return detach(EconomyRepository.class);
+    }
 }
