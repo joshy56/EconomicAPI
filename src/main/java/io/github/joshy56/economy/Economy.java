@@ -44,4 +44,5 @@ public interface Economy extends MultiAttachable {
     int fractionalDigits();
     @NotNull String singularDisplayName();
     @NotNull String pluralDisplayName();
+    @NotNull String format();
 }

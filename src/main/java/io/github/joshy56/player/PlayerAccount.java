@@ -6,6 +6,7 @@ import io.github.joshy56.economy.Economy;
 import io.github.joshy56.response.Response;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -17,7 +18,7 @@ public class PlayerAccount extends SimpleAttachable implements Account {
     private double balance;
 
     public PlayerAccount(@NotNull Player player) {
-        super(Map.of(Economy.class, null));
+        super(new HashMap<>(Map.of(Economy.class, null)));
         this.player = player;
         balance = 0;
     }
