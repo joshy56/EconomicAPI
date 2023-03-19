@@ -25,7 +25,7 @@ public class SimpleAttachable implements Attachable {
             if (attached == null)
                 return Optional.empty();
 
-            if(attached instanceof MultiAttachable multiAttachable && multiAttachable.attacheds(getClass()).stream().noneMatch(otherAttach -> otherAttach.equals(this))) {
+            if(attached instanceof MultiAttachable multiAttachable && multiAttachable.attachments(getClass()).stream().noneMatch(otherAttach -> otherAttach.equals(this))) {
                 detach(type);
                 return Optional.empty();
             }

@@ -17,10 +17,10 @@ public interface Economy extends MultiAttachable {
     @NotNull Response withdraw(@NotNull Player player, double amount);
     @NotNull Response deposit(@NotNull Player player, double amount);
     default @NotNull Collection<Bank> banks() {
-        return attacheds(Bank.class);
+        return attachments(Bank.class);
     }
     default @NotNull Collection<Player> players() {
-        return attacheds(Player.class);
+        return attachments(Player.class);
     }
     default @NotNull Response attachPlayer(@NotNull Player player) {
         return attach(Player.class, player);
