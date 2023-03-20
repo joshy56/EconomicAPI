@@ -29,7 +29,7 @@ public interface Economy extends MultiAttachable {
         return detach(Player.class, player);
     }
     default @NotNull Response detachAllPlayers() {
-        return detach(Player.class);
+        return detachAll(Player.class);
     }
     default @NotNull Response attachBank(@NotNull Bank bank) {
         return attach(Bank.class, bank);
@@ -38,7 +38,7 @@ public interface Economy extends MultiAttachable {
         return detach(Bank.class, bank);
     }
     default @NotNull Response detachAllBanks() {
-        return detach(Bank.class);
+        return detachAll(Bank.class);
     }
     @NotNull String name();
     int fractionalDigits();
