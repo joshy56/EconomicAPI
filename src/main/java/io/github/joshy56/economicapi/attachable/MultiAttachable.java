@@ -15,4 +15,5 @@ public interface MultiAttachable {
     @NotNull <T> Response attach(@NotNull Class<T> type, @NotNull T value);
 
     @NotNull <T> Response detach(@NotNull Class<T> type, @NotNull T value);
+    @NotNull <T> Response detachAll(@NotNull Class<T> type);
 }

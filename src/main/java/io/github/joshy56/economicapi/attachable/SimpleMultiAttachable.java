@@ -33,6 +33,15 @@ public class SimpleMultiAttachable implements MultiAttachable {
     }
 
     @Override
+    public @NotNull <T> Response detachAll(@NotNull Class<T> type) {
+        if(!attachments.containsKey(type))
+            return new Response(ResponseType.FAILURE, new IllegalArgumentException("Can't detach, because this type is not allowed here (don't mapped)"));
+
+        attachments.put(type, null);
+        return new Response(ResponseType.SUCCESS, null);
+    }
+
+    @Override
     public @NotNull <T> Collection<T> attachments(@NotNull Class<T> type) {
         try{
             Collection<T> attachments = (Collection<T>) this.attachments.get(type);
