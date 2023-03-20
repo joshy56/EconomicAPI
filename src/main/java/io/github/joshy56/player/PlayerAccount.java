@@ -3,7 +3,10 @@ package io.github.joshy56.player;
 import io.github.joshy56.attachable.SimpleAttachable;
 import io.github.joshy56.economy.Account;
 import io.github.joshy56.economy.Economy;
+import io.github.joshy56.event.HandlerList;
+import io.github.joshy56.events.AccountBalanceEvent;
 import io.github.joshy56.response.Response;
+import io.github.joshy56.response.ResponseType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -35,12 +38,30 @@ public class PlayerAccount extends SimpleAttachable implements Account {
 
     @Override
     public @NotNull Response withdraw(double amount) {
-        return null;
+        AccountBalanceEvent balanceEvent = new AccountBalanceEvent(
+                this, balance(), (balance() - Math.abs(amount)), AccountBalanceEvent.BalanceAction.WITHDRAW
+        );
+        HandlerList.handle(balanceEvent);
+
+        if (balanceEvent.cancelled())
+            return new Response(ResponseType.FAILURE, new RuntimeException("Can't change balance, balance event cancelled."));
+
+        balance = balanceEvent.newBalance();
+        return new Response(ResponseType.SUCCESS, null);
     }
 
     @Override
     public @NotNull Response deposit(double amount) {
-        return null;
+        AccountBalanceEvent balanceEvent = new AccountBalanceEvent(
+                this, balance(), (balance() + Math.abs(amount)), AccountBalanceEvent.BalanceAction.DEPOSIT
+        );
+        HandlerList.handle(balanceEvent);
+
+        if (balanceEvent.cancelled())
+            return new Response(ResponseType.FAILURE, new RuntimeException("Can't change balance, balance event cancelled."));
+
+        balance = balanceEvent.newBalance();
+        return new Response(ResponseType.SUCCESS, null);
     }
 
     @Override
