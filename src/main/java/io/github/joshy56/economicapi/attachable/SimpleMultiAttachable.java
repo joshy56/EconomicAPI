@@ -19,11 +19,6 @@ public class SimpleMultiAttachable implements MultiAttachable {
     }
 
     @Override
-    public @NotNull <T> Optional<T> attached(@NotNull Class<T> type) {
-        return attachments(type).stream().findAny();
-    }
-
-    @Override
     public @NotNull <T> Response attach(@NotNull Class<T> type, @NotNull T attachable) {
         if(!attachments.containsKey(type))
             return new Response(ResponseType.FAILURE, new IllegalArgumentException("Can't attach an value for a type don't mapped previously"));
@@ -34,15 +29,6 @@ public class SimpleMultiAttachable implements MultiAttachable {
 
         attachments.add(attachable);
         this.attachments.put(type, (Collection<Object>) attachments);
-        return new Response(ResponseType.SUCCESS, null);
-    }
-
-    @Override
-    public @NotNull <T> Response detach(@NotNull Class<T> type) {
-        if(!attachments.containsKey(type))
-            return new Response(ResponseType.FAILURE, new IllegalArgumentException("Can't detach, because this type is not allowed here (don't mapped)"));
-
-        attachments.put(type, null);
         return new Response(ResponseType.SUCCESS, null);
     }
 

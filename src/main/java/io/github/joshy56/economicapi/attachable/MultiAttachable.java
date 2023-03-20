@@ -9,7 +9,10 @@ import java.util.Collection;
  * @author joshy56
  * @since 18/3/2023
  */
-public interface MultiAttachable extends Attachable {
+public interface MultiAttachable {
     @NotNull <T> Collection<T> attachments(@NotNull Class<T> type);
+
+    @NotNull <T> Response attach(@NotNull Class<T> type, @NotNull T value);
+
     @NotNull <T> Response detach(@NotNull Class<T> type, @NotNull T value);
 }
